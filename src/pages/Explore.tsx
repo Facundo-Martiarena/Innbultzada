@@ -1,10 +1,8 @@
-import { CalendarDays, ChevronDown, Heart, Lightbulb, X } from 'lucide-react';
+import { ArrowRight, Bookmark, BookmarkCheck, CalendarDays, ChevronDown, Lightbulb, X } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FlowNav } from '../components/FlowNav';
-import { MatchOverlay } from '../components/MatchOverlay';
 import { PageHeader } from '../components/PageHeader';
-import { SwipeDeck } from '../components/SwipeDeck';
 import { CompatibilityRing, DemoBadge, PriorityPill } from '../components/primitives';
 import { applicantById } from '../data/applicants';
 import { CHALLENGES } from '../data/challenges';
@@ -23,28 +21,37 @@ export default function Explore() {
   const nav = useNavigate();
   const me = applicantById(DEMO_STARTUP)!;
   const [filter, setFilter] = useState<Category | null>(null);
-  const [likes, setLikes] = useState<string[]>([]);
-  const [matched, setMatched] = useState<Challenge | null>(null);
-  const [showMatches, setShowMatches] = useState(false);
+  const [saved, setSaved] = useState<string[]>([]);
+  const [discarded, setDiscarded] = useState<string[]>([]);
+  const [showSaved, setShowSaved] = useState(false);
   useEffect(() => { reach(1); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // El reto de la demo aparece primero; después, el resto.
+  // El reto de la demo aparece primero; después, el resto ordenado por prioridad.
   const deck = useMemo(() => {
     const list = CHALLENGES.filter((c) => !filter || c.categories.includes(filter));
     return [...list].sort((a, b) => (a.id === challengeId ? -1 : b.id === challengeId ? 1 : priorityScore(b) - priorityScore(a)));
   }, [filter, challengeId]);
 
+  const visible = deck.filter((c) => !discarded.includes(c.id));
+  const savedChallenges = CHALLENGES.filter((c) => saved.includes(c.id));
+  const demoSaved = saved.includes(challengeId);
+
+  const toggleSave = (id: string) => setSaved((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
+  const discard = (id: string) => { setDiscarded((d) => [...d, id]); setSaved((s) => s.filter((x) => x !== id)); };
+  const goApply = (id: string) => { setChallengeId(id); nav(`/reto/${id}/postular`); };
+
   const card = (c: Challenge) => {
     const m = scoreActor(c, me);
     const open = published.includes(c.id) || c.id !== challengeId;
+    const isSaved = saved.includes(c.id);
     return (
-      <div className="flex h-full flex-col">
+      <li key={c.id} className="card flex flex-col overflow-hidden animate-rise">
         <div className="relative bg-navy px-6 pb-5 pt-6 text-white">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-3">
             <span className="font-mono text-xs text-navy-100">{c.code} · Reto Demo</span>
             <span className={`chip ${open ? 'bg-impact text-white' : 'bg-opportunity text-navy'}`}>{open ? 'Convocatoria abierta' : 'Próximamente'}</span>
           </div>
-          <h3 className="mt-3 font-display text-[1.6rem] font-semibold leading-tight text-white">{c.title}</h3>
+          <h3 className="mt-3 font-display text-[1.5rem] font-semibold leading-tight text-white">{c.title}</h3>
           <p className="mt-1 text-sm text-navy-100">{c.origin}</p>
         </div>
         <div className="flex flex-1 flex-col p-6">
@@ -62,7 +69,7 @@ export default function Explore() {
               );
             })}
           </div>
-          <div className="mt-auto flex items-center gap-3 border-t border-line pt-4">
+          <div className="mt-4 flex items-center gap-3 border-t border-line pt-4">
             <CompatibilityRing value={m.score} size={58} label="encaje con tu startup" />
             <div className="flex-1 text-sm">
               <p className="font-semibold text-navy">Encaje con tu startup</p>
@@ -71,33 +78,41 @@ export default function Explore() {
             </div>
             <PriorityPill p={c.priority} />
           </div>
+          {/* Decisión evaluada: acciones explícitas, sin gesto ni corazón. */}
+          <div className="mt-5 flex flex-wrap items-center gap-2">
+            <button type="button" className="btn-navy min-h-[42px] flex-1 justify-center gap-2 px-4" onClick={() => goApply(c.id)}>
+              Postular <ArrowRight size={16} aria-hidden />
+            </button>
+            <button type="button" aria-pressed={isSaved} onClick={() => toggleSave(c.id)}
+              className={`btn min-h-[42px] gap-2 px-4 ${isSaved ? 'bg-impact-50 text-impact-600 ring-1 ring-impact/30' : 'border border-line bg-paper-raised text-navy hover:border-navy-300'}`}>
+              {isSaved ? <><BookmarkCheck size={16} aria-hidden />Guardado</> : <><Bookmark size={16} aria-hidden />Me interesa</>}
+            </button>
+            <button type="button" className="btn-ghost min-h-[42px] gap-2 px-3 text-sm text-ink-muted" onClick={() => discard(c.id)}>
+              <X size={16} aria-hidden />Pasar
+            </button>
+          </div>
         </div>
-      </div>
+      </li>
     );
   };
-
-  const liked = CHALLENGES.filter((c) => likes.includes(c.id));
-  const demoLiked = likes.includes(challengeId);
-  const goApply = (id: string) => { setChallengeId(id); nav(`/reto/${id}/postular`); };
 
   return (
     <>
       <PageHeader
         stage="match"
         title={<>5 · La startup evalúa <span className="text-magenta">los retos de LABORAL Kutxa</span></>}
-        lead="No es deslizar por deslizar: cada tarjeta muestra el encaje con tu startup, las capacidades que busca y el plazo. Revisá cada reto y decidí — a la derecha si te interesa, a la izquierda para pasar."
+        lead="No es deslizar por deslizar: revisá la lista, compará el encaje de cada reto con tu startup, las capacidades que busca y el plazo. Postulate al que te convenza, guardá los que quieras evaluar y pasá el resto."
         aside={<DemoBadge label="Ejemplo ficticio" />}
       />
 
-      {/* Experiencia inmersiva: una sola columna centrada, todo el foco en la carta. */}
-      <div className="mx-auto max-w-2xl">
+      <div className="mx-auto max-w-5xl">
         <div className="mb-4 flex items-center justify-between gap-3">
           <span className="chip bg-navy-50 py-1.5 text-navy">Viendo como <strong className="font-semibold">{me.name}</strong></span>
-          <button type="button" onClick={() => setShowMatches((s) => !s)} aria-expanded={showMatches} aria-controls="matches-panel"
-            className={`btn min-h-[40px] gap-2 px-4 text-sm ${liked.length ? 'bg-magenta text-white hover:bg-magenta-600' : 'border border-line bg-paper-raised text-navy hover:border-navy-300'}`}>
-            <Heart size={16} className={liked.length ? 'fill-white' : 'text-magenta'} aria-hidden />
-            Me interesan <span className="font-mono">{liked.length}</span>
-            <ChevronDown size={15} className={`transition ${showMatches ? 'rotate-180' : ''}`} aria-hidden />
+          <button type="button" onClick={() => setShowSaved((s) => !s)} aria-expanded={showSaved} aria-controls="saved-panel"
+            className={`btn min-h-[40px] gap-2 px-4 text-sm ${savedChallenges.length ? 'bg-navy text-white hover:bg-navy-700' : 'border border-line bg-paper-raised text-navy hover:border-navy-300'}`}>
+            <Bookmark size={16} className={savedChallenges.length ? 'fill-white' : 'text-navy'} aria-hidden />
+            Me interesan <span className="font-mono">{savedChallenges.length}</span>
+            <ChevronDown size={15} className={`transition ${showSaved ? 'rotate-180' : ''}`} aria-hidden />
           </button>
         </div>
 
@@ -110,15 +125,15 @@ export default function Explore() {
           ))}
         </div>
 
-        {/* Panel de matches plegable */}
-        {showMatches && (
-          <div id="matches-panel" className="card mb-5 p-4 animate-rise" aria-live="polite">
-            <h2 className="flex items-center gap-2 text-sm font-semibold text-navy"><Heart size={16} className="text-magenta" aria-hidden />Retos que te interesan <span className="font-mono text-ink-muted">{liked.length}</span></h2>
-            {liked.length === 0 ? (
-              <p className="mt-2 text-sm text-ink-muted">Deslizá a la derecha los retos cuyo encaje te convenza.</p>
+        {/* Panel de retos guardados, plegable */}
+        {showSaved && (
+          <div id="saved-panel" className="card mb-5 p-4 animate-rise" aria-live="polite">
+            <h2 className="flex items-center gap-2 text-sm font-semibold text-navy"><Bookmark size={16} className="text-navy" aria-hidden />Retos que te interesan <span className="font-mono text-ink-muted">{savedChallenges.length}</span></h2>
+            {savedChallenges.length === 0 ? (
+              <p className="mt-2 text-sm text-ink-muted">Guardá con «Me interesa» los retos cuyo encaje te convenza para compararlos acá.</p>
             ) : (
               <ul className="mt-3 grid gap-2">
-                {liked.map((c) => (
+                {savedChallenges.map((c) => (
                   <li key={c.id} className="flex items-center gap-3 rounded-xl border border-line p-3">
                     <span className="min-w-0 flex-1 text-sm font-semibold leading-snug text-navy">{c.title}</span>
                     <button type="button" className="btn-navy min-h-[36px] px-3 text-xs" onClick={() => goApply(c.id)}>Postular</button>
@@ -129,22 +144,12 @@ export default function Explore() {
           </div>
         )}
 
-        <SwipeDeck
-          key={filter ?? 'all'}
-          items={deck}
-          getKey={(c) => c.id}
-          renderCard={card}
-          onDecide={(c, dir) => {
-            if (dir !== 'right') return;
-            setLikes((l) => (l.includes(c.id) ? l : [...l, c.id]));
-            setMatched(c);
-          }}
-          onUndo={(c) => setLikes((l) => l.filter((x) => x !== c.id))}
-          left={{ label: 'Pasar', Icon: X, stamp: 'PASO' }}
-          right={{ label: 'Me interesa', Icon: Heart, stamp: 'SÍ' }}
-          empty={<p className="text-ink-muted">No quedan más retos con este filtro.</p>}
-          height={560}
-        />
+        {/* Lista evaluable: comparás lado a lado y decidís. */}
+        {visible.length > 0 ? (
+          <ul className="grid gap-4 lg:grid-cols-2">{visible.map(card)}</ul>
+        ) : (
+          <p className="card p-8 text-center text-ink-muted">No quedan más retos con este filtro.</p>
+        )}
 
         <p className="mt-6 text-center text-sm text-ink-muted present:hidden">
           <Lightbulb size={15} className="mr-1 inline text-magenta" aria-hidden />
@@ -153,21 +158,7 @@ export default function Explore() {
         </p>
       </div>
 
-      {matched && (() => {
-        const m = scoreActor(matched, me);
-        return (
-          <MatchOverlay
-            challenge={matched}
-            startup={me}
-            score={m.score}
-            reason={`Aporta ${m.covers.length} de las ${matched.needs.length} capacidades que busca el reto.`}
-            onApply={() => goApply(matched.id)}
-            onDismiss={() => setMatched(null)}
-          />
-        );
-      })()}
-
-      <FlowNav step="explorar" nextLabel="Postularme al reto" nextDisabled={!demoLiked} disabledHint="Deslizá a la derecha un reto que te interese para continuar." />
+      <FlowNav step="explorar" nextLabel="Postularme al reto" nextDisabled={!demoSaved} disabledHint="Marcá «Me interesa» en un reto que encaje para continuar." />
     </>
   );
 }
