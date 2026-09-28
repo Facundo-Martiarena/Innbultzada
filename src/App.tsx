@@ -32,7 +32,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/seccion/:slug" element={<Section />} />
-            <Route path="/seccion" element={<Navigate to="/seccion/flujo" replace />} />
+            <Route path="/seccion" element={<Navigate to="/seccion/portada" replace />} />
             <Route path="/capitulo/:slug" element={<Chapter />} />
             <Route path="/capitulo" element={<Navigate to="/capitulo/reto" replace />} />
             <Route path="/como-funciona" element={<HowItWorks />} />

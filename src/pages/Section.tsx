@@ -16,6 +16,7 @@ export default function Section() {
   const startX = useRef<number | null>(null);
   const stateRevealed = (loc.state as { revealed?: number } | null)?.revealed;
   const [revealed, setRevealed] = useState(typeof stateRevealed === 'number' ? stateRevealed : (sec?.beats.length ?? 0));
+  const [imgOk, setImgOk] = useState(true);
 
   useEffect(() => {
     const s = (loc.state as { revealed?: number } | null)?.revealed;
@@ -50,7 +51,7 @@ export default function Section() {
     return () => window.removeEventListener('keydown', onKey);
   });
 
-  if (!sec) return <Navigate to="/seccion/flujo" replace />;
+  if (!sec) return <Navigate to="/seccion/portada" replace />;
   const total = sec.beats.length;
   const more = revealed < total;
 
@@ -83,6 +84,22 @@ export default function Section() {
       </ol>
 
       <div className="flex flex-1 flex-col justify-center gap-5 py-4">
+        {sec.cover ? (
+          imgOk ? (
+            <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt="INNBULTZADA · portada" onError={() => setImgOk(false)}
+              className="mx-auto max-h-[calc(100dvh-11rem)] w-full rounded-xl2 object-contain shadow-card" />
+          ) : (
+            <div className="grid min-h-[50vh] place-items-center rounded-xl2 border border-line bg-paper-raised p-8 text-center">
+              <div>
+                <p className="font-display text-4xl font-bold tracking-tight text-magenta sm:text-6xl">INNBULTZADA</p>
+                <p className="mt-2 font-mono text-xs uppercase tracking-[0.3em] text-navy sm:text-sm">Impulsar · Conectar · Crear</p>
+                <p className="mt-4 text-ink-soft">Solución para activar nuevas oportunidades de emprendimiento e innovación.</p>
+                <p className="mt-5 text-xs text-ink-muted">Guardá la portada en <code>public/brand/portada.png</code></p>
+              </div>
+            </div>
+          )
+        ) : (
+        <>
         <header>
           <p className="inline-flex items-center gap-2 rounded-full bg-navy px-3 py-1 font-mono text-[0.7rem] font-semibold uppercase tracking-wider text-white">{sec.eyebrow}</p>
           <h1 className="mt-2.5 text-2xl font-semibold leading-tight sm:text-[2rem]">{sec.title}</h1>
@@ -121,6 +138,8 @@ export default function Section() {
               </button>
             )}
           </div>
+        )}
+        </>
         )}
       </div>
 

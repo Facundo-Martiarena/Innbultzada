@@ -26,9 +26,15 @@ export interface Section {
   cta?: { label: string; to: string };
   loop?: boolean;
   diagram?: boolean;
+  /** Slide de portada a pantalla completa (nombre del archivo en public/brand/) */
+  cover?: string;
 }
 
 export const SECTIONS: Section[] = [
+  {
+    n: 0, slug: 'portada', eyebrow: '', title: 'INNBULTZADA', lead: '',
+    beats: [], cover: 'portada.png',
+  },
   {
     n: 1, slug: 'flujo', eyebrow: 'El ecosistema', title: 'El flujo completo',
     lead: 'Así se conecta todo: de la necesidad y la idea, a nuevas empresas arraigadas. Tocá cada bloque para recorrerlo.',

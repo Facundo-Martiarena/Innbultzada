@@ -40,7 +40,7 @@ export default function Home() {
             LABORAL Kutxa publica sus retos de servicios financieros; las startups se postulan y las mejores llegan a un <strong className="text-navy">piloto pagado</strong>.
           </p>
           <div className="mt-7 flex flex-wrap gap-3 animate-rise" style={{ animationDelay: '240ms' }}>
-            <button type="button" className="btn-primary min-h-[52px] px-6 text-lg" onClick={() => nav('/seccion/flujo', { state: { revealed: 0 } })}>
+            <button type="button" className="btn-primary min-h-[52px] px-6 text-lg" onClick={() => nav('/seccion/portada')}>
               <PlayCircle size={20} aria-hidden /> Empezar la presentación
             </button>
             <button type="button" className="btn-ghost min-h-[52px] px-6 text-lg" onClick={() => nav('/ecosistema')}>
@@ -87,7 +87,7 @@ export default function Home() {
           <h2 id="caps" className="mt-1 text-2xl font-semibold sm:text-3xl">El flujo del ecosistema, paso a paso</h2>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
-          {SECTIONS.map((s) => (
+          {SECTIONS.filter((s) => !s.cover).map((s) => (
             <button key={s.slug} type="button" onClick={() => nav(`/seccion/${s.slug}`, { state: { revealed: 0 } })}
               className="card flex items-start gap-4 p-5 text-left transition hover:-translate-y-0.5 hover:border-navy-300 hover:shadow-lift">
               <span className="font-display text-3xl font-semibold leading-none text-magenta">0{s.n}</span>
