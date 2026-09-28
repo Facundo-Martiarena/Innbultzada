@@ -36,11 +36,11 @@ export default function Chapter() {
     if (dir === 1) {
       if (revealed < ch.beats.length) setRevealed((r) => r + 1);
       else if (next) nav(`/capitulo/${next.slug}`, { state: { revealed: 0 } });
-      else nav('/seccion/innov', { state: { revealed: 0 } }); // sigue el flujo del ecosistema
+      else nav('/seccion/modelo', { state: { revealed: 0 } }); // sigue la presentación
     } else {
       if (revealed > 0) setRevealed((r) => r - 1);
       else if (prev) nav(`/capitulo/${prev.slug}`, { state: { revealed: prev.beats.length } });
-      else nav('/seccion/match'); // vuelve a la sección INNBULTZADA
+      else nav('/seccion/herramienta'); // vuelve a la slide "La herramienta"
     }
   };
 
@@ -133,13 +133,13 @@ export default function Chapter() {
       <nav className="flex items-center justify-between gap-3 border-t border-line pt-4" aria-label="Presentación">
         <button type="button" className="btn-ghost min-h-[44px] shrink-0" onClick={() => step(-1)}>
           <ArrowLeft size={18} aria-hidden />
-          <span className="max-sm:sr-only">{revealed > 0 ? 'Anterior' : prev ? prev.title : 'INNBULTZADA'}</span>
+          <span className="max-sm:sr-only">{revealed > 0 ? 'Anterior' : prev ? prev.title : 'La herramienta'}</span>
         </button>
         <span className="mx-auto font-mono text-xs text-ink-muted" aria-hidden>
           {total ? `${Math.min(revealed + (more ? 1 : 0), total)}/${total}` : ''} · <span className="max-sm:hidden">← →</span><span className="sm:hidden">deslizá</span>
         </span>
         <button type="button" className="btn-primary min-h-[44px] shrink-0" onClick={() => step(1)}>
-          <span>{more ? 'Siguiente' : next ? next.title : 'Seguir el flujo'}</span>
+          <span>{more ? 'Siguiente' : next ? next.title : 'El modelo'}</span>
           <ArrowRight size={18} aria-hidden />
         </button>
       </nav>

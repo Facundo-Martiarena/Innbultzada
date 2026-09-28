@@ -57,7 +57,7 @@ export default function Section() {
 
   return (
     <div
-      className="mx-auto flex min-h-[calc(100dvh-4rem)] max-w-3xl flex-col py-3"
+      className={`mx-auto flex min-h-[calc(100dvh-4rem)] flex-col py-3 ${sec.cover ? 'max-w-none' : 'max-w-3xl'}`}
       onPointerDown={(e) => { startX.current = e.clientX; }}
       onPointerUp={(e) => {
         if (startX.current === null) return;
@@ -85,19 +85,26 @@ export default function Section() {
 
       <div className="flex flex-1 flex-col justify-center gap-5 py-4">
         {sec.cover ? (
-          imgOk ? (
-            <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt="INNBULTZADA · portada" onError={() => setImgOk(false)}
-              className="mx-auto max-h-[calc(100dvh-11rem)] w-full rounded-xl2 object-contain shadow-card" />
-          ) : (
-            <div className="grid min-h-[50vh] place-items-center rounded-xl2 border border-line bg-paper-raised p-8 text-center">
-              <div>
-                <p className="font-display text-4xl font-bold tracking-tight text-magenta sm:text-6xl">INNBULTZADA</p>
-                <p className="mt-2 font-mono text-xs uppercase tracking-[0.3em] text-navy sm:text-sm">Impulsar · Conectar · Crear</p>
-                <p className="mt-4 text-ink-soft">Solución para activar nuevas oportunidades de emprendimiento e innovación.</p>
-                <p className="mt-5 text-xs text-ink-muted">Guardá la portada en <code>public/brand/portada.png</code></p>
+          <div className="flex flex-col items-center gap-4">
+            {imgOk ? (
+              <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title} onError={() => setImgOk(false)}
+                className="mx-auto max-h-[calc(100dvh-11rem)] w-full rounded-xl2 object-contain shadow-card" />
+            ) : (
+              <div className="grid min-h-[50vh] w-full place-items-center rounded-xl2 border border-line bg-paper-raised p-8 text-center">
+                <div>
+                  <p className="font-display text-4xl font-bold tracking-tight text-magenta sm:text-6xl">INNBULTZADA</p>
+                  <p className="mt-2 font-mono text-xs uppercase tracking-[0.3em] text-navy sm:text-sm">Impulsar · Conectar · Crear</p>
+                  <p className="mt-4 text-ink-soft">{sec.title}</p>
+                  <p className="mt-5 text-xs text-ink-muted">Falta la imagen en <code>public/brand/{sec.cover}</code></p>
+                </div>
               </div>
-            </div>
-          )
+            )}
+            {sec.cta && (
+              <button type="button" onClick={() => nav(sec.cta!.to, { state: { revealed: 0 } })} className="btn-primary min-h-[48px]">
+                {sec.cta.label} <ArrowRight size={18} aria-hidden />
+              </button>
+            )}
+          </div>
         ) : (
         <>
         <header>

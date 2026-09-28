@@ -1,4 +1,4 @@
-import { ArrowRight, Briefcase, FastForward, GraduationCap, Handshake, Microscope, PlayCircle, Rocket, Target, Umbrella, UserRound, UserRoundCheck } from 'lucide-react';
+import { Briefcase, FastForward, GraduationCap, Handshake, Microscope, PlayCircle, Rocket, Target, Umbrella, UserRound, UserRoundCheck } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BrandHero } from '../components/BrandLogo';
@@ -84,19 +84,17 @@ export default function Home() {
       <section aria-labelledby="caps" className="border-t border-line/70 py-12 sm:py-14">
         <div className="mb-6 sm:mb-8">
           <p className="eyebrow">La presentación</p>
-          <h2 id="caps" className="mt-1 text-2xl font-semibold sm:text-3xl">El flujo del ecosistema, paso a paso</h2>
+          <h2 id="caps" className="mt-1 text-2xl font-semibold sm:text-3xl">Las 9 diapositivas</h2>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {SECTIONS.filter((s) => !s.cover).map((s) => (
-            <button key={s.slug} type="button" onClick={() => nav(`/seccion/${s.slug}`, { state: { revealed: 0 } })}
-              className="card flex items-start gap-4 p-5 text-left transition hover:-translate-y-0.5 hover:border-navy-300 hover:shadow-lift">
-              <span className="font-display text-3xl font-semibold leading-none text-magenta">0{s.n}</span>
-              <span className="min-w-0 flex-1">
-                <span className="block font-mono text-[0.62rem] font-semibold uppercase tracking-[0.14em] text-ink-muted">{s.eyebrow}</span>
-                <span className="mt-0.5 block text-lg font-semibold text-navy">{s.title}</span>
-                <span className="mt-1 block text-sm leading-snug text-ink-soft">{s.lead}</span>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+          {SECTIONS.map((s) => (
+            <button key={s.slug} type="button" onClick={() => nav(`/seccion/${s.slug}`)}
+              className="card overflow-hidden text-left transition hover:-translate-y-0.5 hover:border-navy-300 hover:shadow-lift">
+              <img src={`${import.meta.env.BASE_URL}brand/${s.cover}`} alt={s.title} className="aspect-video w-full border-b border-line object-cover" />
+              <span className="flex items-center gap-2 px-3 py-2">
+                <span className="font-mono text-xs text-magenta">{String(s.n).padStart(2, '0')}</span>
+                <span className="truncate text-sm font-semibold text-navy">{s.title}</span>
               </span>
-              <ArrowRight size={18} className="mt-1 shrink-0 text-navy-300" aria-hidden />
             </button>
           ))}
         </div>
