@@ -33,7 +33,7 @@ export interface Section {
 export const SECTIONS: Section[] = [
   {
     n: 0, slug: 'portada', eyebrow: '', title: 'INNBULTZADA', lead: '',
-    beats: [], cover: 'portada.png',
+    beats: [], cover: 'caratula_slide.png',
   },
   {
     n: 1, slug: 'flujo', eyebrow: 'El ecosistema', title: 'El flujo completo',
