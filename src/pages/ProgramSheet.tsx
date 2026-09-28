@@ -1,4 +1,4 @@
-import { ArrowRight, BadgeEuro, Check, Clock, Gift, Globe2, Link2, Scale, Target, Trophy, Users } from 'lucide-react';
+import { ArrowRight, BadgeEuro, Check, Clock, Gift, GitCompare, Globe2, Link2, Package, Scale, Target, Trophy, Users, Wallet } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PageHeader } from '../components/PageHeader';
@@ -111,6 +111,61 @@ export default function ProgramSheet() {
               <h2 className="mt-1 text-lg font-semibold text-white">Valor para LABORAL Kutxa</h2>
               <ul className="mt-3 grid gap-1.5 text-[0.95rem] text-white/90">{PROGRAM.lkGains.map((g) => <li key={g} className="flex gap-2"><Check size={16} className="mt-1 shrink-0 text-opportunity" aria-hidden />{g}</li>)}</ul>
             </section>
+          </div>
+        </Reveal>
+
+        <Reveal summary={<span className="flex items-center gap-2"><Package size={16} className="text-magenta" aria-hidden />Catálogo de beneficios de la Impulsadora · {PROGRAM.benefits.totalValue}</span>}>
+          <p className="mb-4 text-sm text-ink-muted">{PROGRAM.benefits.totalNote}</p>
+          <div className="grid gap-4">
+            {PROGRAM.benefits.pillars.map((p, i) => (
+              <section key={p.id} className="card p-5">
+                <h3 className="flex items-center gap-2 text-base font-semibold text-navy">
+                  <span className="grid h-6 w-6 place-items-center rounded-lg bg-magenta-100 font-mono text-xs text-magenta-600">{i + 1}</span>{p.name}
+                </h3>
+                <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {p.items.map((it) => (
+                    <li key={it.name} className="rounded-xl bg-paper-sunk/50 p-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <p className="font-semibold leading-tight text-navy">{it.name}</p>
+                        <span className="chip shrink-0 bg-opportunity-100 text-navy">{it.value}</span>
+                      </div>
+                      <p className="mt-1 text-sm leading-snug text-ink-soft">{it.gives}</p>
+                      <p className="mt-1.5 text-xs text-ink-muted">{it.duration} · ref. {it.ref}</p>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal summary={<span className="flex items-center gap-2"><Wallet size={16} className="text-magenta" aria-hidden />Cuenta empresarial en LABORAL Kutxa (fuera de la Impulsadora)</span>}>
+          <p className="mb-4 text-sm text-ink-muted">{PROGRAM.businessAccount.note}</p>
+          <div className="grid grid-cols-3 gap-4 max-lg:grid-cols-1">
+            {PROGRAM.businessAccount.categories.map((c) => (
+              <section key={c.id} className="rounded-xl bg-paper-sunk/50 p-4">
+                <h3 className="font-semibold leading-tight text-navy">{c.name}</h3>
+                <ul className="mt-2 grid gap-1.5 text-sm text-ink-soft">{c.items.map((i) => <li key={i} className="flex gap-2"><Check size={15} className="mt-0.5 shrink-0 text-impact" aria-hidden />{i}</li>)}</ul>
+              </section>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal summary={<span className="flex items-center gap-2"><GitCompare size={16} className="text-magenta" aria-hidden />INNBULTZADA vs Mondragon Ventures</span>}>
+          <p className="mb-4 rounded-xl bg-navy-50 p-3 text-sm leading-relaxed text-navy">{PROGRAM.vsMondragon.essence}</p>
+          <div className="overflow-hidden rounded-xl border border-line">
+            <div className="grid grid-cols-[1fr_1.5fr_1.5fr] text-xs font-semibold text-white max-sm:text-[0.7rem]">
+              <div className="bg-navy p-3">Dimensión</div>
+              <div className="bg-navy p-3">Mondragon Ventures</div>
+              <div className="bg-magenta p-3">INNBULTZADA</div>
+            </div>
+            {PROGRAM.vsMondragon.rows.map((r, i) => (
+              <div key={r.dim} className={`grid grid-cols-[1fr_1.5fr_1.5fr] text-sm ${i % 2 ? 'bg-paper-sunk/40' : ''}`}>
+                <div className="p-3 font-semibold text-navy">{r.dim}</div>
+                <div className="p-3 leading-snug text-ink-soft">{r.mondragon}</div>
+                <div className="border-l border-magenta-100 p-3 leading-snug text-ink-soft">{r.innbultzada}</div>
+              </div>
+            ))}
           </div>
         </Reveal>
 
