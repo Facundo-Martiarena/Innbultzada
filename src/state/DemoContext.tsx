@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import { CHALLENGES } from '../data/challenges';
 import type { OutcomeId } from '../data/types';
 import type { OpenIdea } from '../data/ecosystem';
+import type { Diagnosis } from '../data/diagnostic';
 
 export type GateDecision = 'go' | 'pivot' | 'stop' | null;
 
@@ -10,6 +11,9 @@ interface DemoState {
   togglePresentation: (v?: boolean) => void;
   challengeId: string;
   setChallengeId: (id: string) => void;
+  /** Diagnóstico enviado por un área (nombre + Impact Score) — aparece en Votación */
+  myDiagnosis: Diagnosis | null;
+  setMyDiagnosis: (d: Diagnosis | null) => void;
   /** Retos priorizados para la convocatoria */
   prioritized: string[];
   togglePrioritized: (id: string) => void;
@@ -56,6 +60,7 @@ export const MAX_SELECTED = 2;
 
 export function DemoProvider({ children }: { children: ReactNode }) {
   const [presentation, setPresentation] = useState(false);
+  const [myDiagnosis, setMyDiagnosis] = useState<Diagnosis | null>(null);
   const [challengeId, setId] = useState(DEFAULT);
   const [prioritized, setPrioritized] = useState<string[]>(['tesoreria-pymes', 'relevo-generacional', 'mayores-digital']);
   const [published, setPublished] = useState<string[]>([]);
@@ -95,6 +100,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo<DemoState>(() => ({
     presentation, togglePresentation,
+    myDiagnosis, setMyDiagnosis,
     challengeId, setChallengeId,
     prioritized,
     togglePrioritized: (id) => setPrioritized((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id])),
@@ -113,7 +119,7 @@ export function DemoProvider({ children }: { children: ReactNode }) {
     client0, setClient0,
     outcome, setOutcome,
     reached, reach: (i) => setReached((r) => Math.max(r, i)),
-  }), [presentation, togglePresentation, challengeId, setChallengeId, prioritized, published, applied, accelerator, eligibility, idea, myVotes, shortlist, selected, team, decision, client0, outcome, reached]);
+  }), [presentation, togglePresentation, myDiagnosis, challengeId, setChallengeId, prioritized, published, applied, accelerator, eligibility, idea, myVotes, shortlist, selected, team, decision, client0, outcome, reached]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
