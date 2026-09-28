@@ -6,7 +6,7 @@ export type NodeId = 'ideas' | 'acc' | 'startups' | 'match' | 'impulso' | 'empre
 
 export const NODES: Record<NodeId, { x: number; y: number; w: number; h: number; label: string; sub?: string; tone: string; shape?: 'circle' | 'cloud' | 'tri' }> = {
   ideas: { x: 40, y: 60, w: 130, h: 64, label: 'Ideas', tone: 'bg-navy-50 text-navy', shape: 'cloud' },
-  acc: { x: 430, y: 40, w: 250, h: 100, label: 'Red de aceleradoras e incubadoras', sub: 'Recomiendan INNBULTZADA', tone: 'bg-magenta-100 text-magenta-600' },
+  acc: { x: 430, y: 40, w: 250, h: 100, label: 'Entorno de cooperación', sub: 'Aceleradoras e incubadoras recomiendan INNBULTZADA', tone: 'bg-magenta-100 text-magenta-600' },
   startups: { x: 450, y: 190, w: 210, h: 84, label: 'Startups con MVP en servicios financieros', tone: 'bg-opportunity-100 text-navy' },
   match: { x: 410, y: 320, w: 290, h: 190, label: 'INNBULTZADA', sub: 'Herramienta de matching: problemas ↔ soluciones', tone: 'bg-navy text-white', shape: 'circle' },
   impulso: { x: 830, y: 340, w: 260, h: 140, label: 'Estrategia impulsadora', sub: 'Programa: qué ofrecemos y cuánto dura', tone: 'bg-impact-100 text-impact-600' },

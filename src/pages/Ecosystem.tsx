@@ -11,10 +11,10 @@ import { useDemo } from '../state/DemoContext';
 const DETAIL: Record<NodeId, { title: string; qa: { q: string; a: string | string[] }[]; go?: { label: string; to: string } }> = {
   ideas: { title: 'Todo empieza con una idea', qa: [{ q: '¿De dónde sale?', a: ['De una startup que tiene una solución', 'De una necesidad de un departamento de LABORAL Kutxa'] }] },
   acc: {
-    title: 'Red de aceleradoras e incubadoras',
+    title: 'Entorno de cooperación',
     qa: [
       { q: '¿Con cuáles trabajaremos?', a: ACCELERATORS.map((a) => `${a.name} · ${a.kind.toLowerCase()}`) },
-      { q: '¿Qué implica el partnership?', a: ['Recomiendan INNBULTZADA a startups de servicios financieros', 'Aplican un primer filtro: servicios financieros + MVP', 'Derivan los proyectos tempranos a Gaztenpresa', 'Reciben recursos y herramientas de la estrategia impulsadora'] },
+      { q: '¿Qué implica la cooperación?', a: ['Recomiendan INNBULTZADA a startups de servicios financieros', 'Aplican un primer filtro: servicios financieros + MVP', 'Derivan los proyectos tempranos a Gaztenpresa (incubación «tipo ascensor»)', 'Reciben recursos y herramientas de la estrategia impulsadora'] },
     ],
     go: { label: 'Ver el acceso de una startup', to: '/startup/acceso' },
   },

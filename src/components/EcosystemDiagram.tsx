@@ -20,6 +20,8 @@ export function EcosystemDiagram({ sel, onSelect }: { sel: NodeId; onSelect: (id
           <text x={870} y={170} fontSize={13} fill="rgb(var(--ink-muted))">recursos y herramientas</text>
           <text x={120} y={752} fontSize={13} fill="rgb(var(--ink-muted))">las empresas establecidas cubren las necesidades de los departamentos</text>
           <text x={16} y={28} fontSize={15} fontWeight={700} fill="rgb(var(--navy))">Ecosistema I&amp;E Bizkaia</text>
+          <text x={430} y={30} fontSize={12} fontWeight={600} fill="rgb(var(--magenta-600))">Entrada ecosistema · aceleradoras y startups</text>
+          <text x={60} y={310} fontSize={12} fontWeight={600} fill="rgb(var(--navy))">Entrada LK · departamentos y votación</text>
         </svg>
         {(Object.keys(NODES) as NodeId[]).map((id) => {
           const n = NODES[id]; const on = sel === id;
