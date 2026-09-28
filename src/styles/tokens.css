@@ -1,0 +1,43 @@
+/*
+ * INNBULTZADA — Design tokens (propuesta de prototipo).
+ * Magenta y verde tomados del logo de INNBULTZADA. No constituyen el manual oficial de marca de LABORAL Kutxa.
+ * Cambia aquí los valores RGB para re-tematizar todo el prototipo.
+ */
+:root {
+  /* Estructura — azul marino */
+  --navy: 19 42 79;          /* #132A4F */
+  --navy-700: 34 62 107;
+  --navy-500: 72 99 145;
+  --navy-300: 150 169 201;
+  --navy-100: 221 228 240;
+  --navy-50: 240 243 249;
+
+  /* Acento — magenta */
+  --magenta: 150 10 87;      /* #960A57 · logo */
+  --magenta-600: 118 6 68;
+  --magenta-100: 245 214 231;
+  --magenta-50: 252 240 246;
+
+  /* Impacto / avance — verde */
+  --green: 78 118 32;        /* #4E7620 · logo (oscurecido para contraste AA) */
+  --green-600: 64 99 24;
+  --green-100: 223 238 204;
+  --green-50: 242 248 234;
+
+  /* Verde claro del logo (decorativo, no para texto) */
+  --green-logo: 141 184 74;  /* #8DB84A */
+
+  /* Oportunidad — amarillo suave */
+  --yellow: 242 208 94;      /* #F2D05E */
+  --yellow-600: 138 102 0;
+  --yellow-100: 252 243 207;
+
+  /* Neutros */
+  --ink: 17 24 39;
+  --ink-soft: 55 65 81;
+  --ink-muted: 94 104 120;
+  --paper: 248 247 244;
+  --paper-raised: 255 255 255;
+  --paper-sunk: 239 237 232;
+  --line: 223 221 214;
+}

@@ -1,0 +1,8 @@
+Logo de INNBULTZADA (generado a partir del PNG facilitado):
+
+  logo.png             → logo completo, fondo transparente
+  logo-horizontal.png  → versión horizontal para la cabecera
+  logo.gif             → logo animado de la portada (Home)
+  symbol.png / wordmark.png / favicon.png → piezas sueltas
+
+Para usar un GIF propio, sustituye logo.gif (mismo nombre) y recarga.

@@ -1,0 +1,31 @@
+@import './tokens.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { font-size: 16px; transition: font-size .25s ease; }
+  :root.present { font-size: 18px; }
+  body { @apply bg-paper text-ink font-sans antialiased; }
+  h1, h2, h3 { @apply font-display tracking-tight text-navy; }
+  :focus-visible { outline: 3px solid rgb(var(--magenta)); outline-offset: 2px; border-radius: 6px; }
+  ::selection { background: rgb(var(--magenta-100)); }
+}
+
+@layer components {
+  .card { @apply bg-paper-raised rounded-xl2 border border-line shadow-card; }
+  .eyebrow { @apply font-mono text-xs font-semibold uppercase tracking-[0.14em] text-ink-muted; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 min-h-[44px] px-5 disabled:opacity-40 disabled:cursor-not-allowed; }
+  .btn-primary { @apply btn bg-magenta text-white hover:bg-magenta-600 shadow-sm hover:shadow-lift hover:-translate-y-px; }
+  .btn-navy { @apply btn bg-navy text-white hover:bg-navy-700; }
+  .btn-ghost { @apply btn border border-line bg-paper-raised text-navy hover:border-navy-300 hover:bg-navy-50; }
+  .chip { @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold; }
+  .grid-bg {
+    background-image: radial-gradient(rgb(var(--navy) / 0.07) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

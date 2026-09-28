@@ -1,0 +1,14 @@
+# dependencias
+node_modules
+
+# build
+dist
+*.tsbuildinfo
+
+# editores / SO
+.idea
+.vscode
+.DS_Store
+
+# logs
+*.log
