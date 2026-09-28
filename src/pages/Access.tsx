@@ -48,7 +48,7 @@ export default function Access() {
               {ACCELERATORS.map((a) => (
                 <Radio key={a.id} name="acc" on={accelerator === a.id} onChange={() => setAccelerator(a.id)}>
                   <span className="block font-semibold leading-tight text-navy">{a.name}</span>
-                  <span className="mt-0.5 block text-xs text-ink-muted">{a.kind}</span>
+                  <span className="mt-0.5 block text-xs text-ink-muted">{a.kind} · {a.pais}</span>
                 </Radio>
               ))}
               <Radio name="acc" on={accelerator === 'otra'} onChange={() => setAccelerator('otra')}>

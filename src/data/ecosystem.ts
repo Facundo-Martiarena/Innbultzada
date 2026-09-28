@@ -4,20 +4,43 @@
  * Departamentos e ideas = ejemplos demostrativos.
  */
 
+export type AcceleratorKind =
+  | 'Aceleradora corporativa'
+  | 'Incubadora y aceleradora'
+  | 'Red de incubadoras'
+  | 'Venture builder'
+  | 'Aceleradora universitaria'
+  | 'Agencia pública de emprendimiento';
+
 export interface Accelerator {
   id: string;
   name: string;
-  kind: 'Aceleradora' | 'Incubadora' | 'Universidad' | 'Centro tecnológico';
-  note: string;
-  partnership: string;
+  pais: string;              // ubicación real
+  kind: AcceleratorKind;     // tipo de actor
+  tipo: 'AC' | 'INC/AC';     // incubación / aceleración (columna del benchmark)
+  enfoque: string;           // a qué apunta (resumen del benchmark real)
+  link: string;              // web oficial del programa
 }
 
+/*
+ * Benchmark real del ecosistema de aceleración e incubación de Euskadi / España
+ * (fuente: sources/Comparación aceleradoras.xlsx › Hoja 1). Actores conceptuales
+ * de referencia: sin partnerships confirmados con INNBULTZADA.
+ */
 export const ACCELERATORS: Accelerator[] = [
-  { id: 'bat', name: 'BAT · B Accelerator Tower', kind: 'Aceleradora', note: 'Startups en fase de aceleración', partnership: 'Partnership a definir' },
-  { id: 'bind', name: 'BIND 4.0', kind: 'Aceleradora', note: 'Programa de aceleración con grandes empresas', partnership: 'Partnership a definir' },
-  { id: 'gaztenpresa', name: 'Gaztenpresa', kind: 'Incubadora', note: 'Proyectos tempranos: incubación «tipo ascensor»', partnership: 'Derivación de proyectos sin MVP' },
-  { id: 'uni', name: 'Incubadora universitaria', kind: 'Universidad', note: 'Spin-offs y equipos de estudiantes', partnership: 'Ejemplo ficticio' },
-  { id: 'ikerlan', name: 'IKERLAN', kind: 'Centro tecnológico', note: 'Spin-offs tecnológicas', partnership: 'Partnership a definir' },
+  { id: 'bind', name: 'BIND (BIND 4.0)', pais: 'España · Euskadi', kind: 'Aceleradora corporativa', tipo: 'AC', enfoque: 'Open Innovation y Venture Client: conecta startups con corporaciones y sector público para pilotos reales.', link: 'https://bind.spri.eus/es/startup-programmes/' },
+  { id: 'redbics', name: 'Red BICs de Euskadi', pais: 'España · Euskadi', kind: 'Red de incubadoras', tipo: 'INC/AC', enfoque: 'Incubación y maduración de proyectos de base tecnológica (programa Ekintzaile).', link: 'https://www.spri.eus/es/ayudas/ekintzaile/' },
+  { id: 'berriup', name: 'BerriUp', pais: 'España · Euskadi', kind: 'Incubadora y aceleradora', tipo: 'INC/AC', enfoque: 'Aceleración de startups early-stage innovadoras y escalables.', link: 'https://berriup.com/programa-de-aceleracion/' },
+  { id: 'batbacc', name: 'BAT BACC (Torre BAT)', pais: 'España · Bilbao', kind: 'Aceleradora corporativa', tipo: 'AC', enfoque: 'Open Innovation, corporate challenges y aterrizaje internacional en el ecosistema BAT.', link: 'https://bacceleratortower.com/programas/' },
+  { id: 'mondragon', name: 'Mondragon Promoción Empresarial', pais: 'España · Euskadi', kind: 'Venture builder', tipo: 'INC/AC', enfoque: 'Venture building + Corporate VC + socio industrial y de mercado del Grupo Mondragon.', link: 'https://www.mondragon-corporation.com/ventures/' },
+  { id: 'ceia', name: 'CEIA (Centro de Empresas e Innovación de Álava)', pais: 'España · Álava', kind: 'Incubadora y aceleradora', tipo: 'INC/AC', enfoque: 'Incubación y apoyo integral al emprendimiento innovador y tecnológico en Álava.', link: 'https://bicaraba.eus/' },
+  { id: 'ieteam', name: 'IE Team Acceleration', pais: 'España · Madrid', kind: 'Aceleradora universitaria', tipo: 'INC/AC', enfoque: 'Aceleración universitaria: validación, prototipado, product-market fit y preparación para inversión.', link: 'https://ieconnects.ie.edu/ieeic/venture-lab/' },
+  { id: 'mta', name: 'MTA · Mondragon Team Academy', pais: 'España · Euskadi', kind: 'Aceleradora universitaria', tipo: 'INC/AC', enfoque: 'Emprendimiento en equipo y learning by doing: formación de teampreneurs con proyectos reales.', link: 'https://mondragonteamacademy.com/es' },
+  { id: 'bilbaoekintza', name: 'Bilbao Ekintza', pais: 'España · Bilbao', kind: 'Agencia pública de emprendimiento', tipo: 'INC/AC', enfoque: 'Incubadoras municipales, creación de empresas y desarrollo económico local.', link: 'https://www.bilbaoekintza.eus/emprende' },
+  { id: 'fomentoss', name: 'Fomento de San Sebastián', pais: 'España · Donostia', kind: 'Agencia pública de emprendimiento', tipo: 'INC/AC', enfoque: 'Ecosistema municipal para crear, acelerar y consolidar proyectos innovadores.', link: 'https://www.fomentosansebastian.eus/es/oportunidades-para-emprender/' },
+  { id: 'zitek', name: 'ZITEK (UPV/EHU)', pais: 'España · Bizkaia', kind: 'Aceleradora universitaria', tipo: 'INC/AC', enfoque: 'Emprendimiento universitario y transferencia de conocimiento de la comunidad UPV/EHU.', link: 'https://www.ehu.eus/es/web/enpresa/emprendimiento' },
+  { id: 'ekinn', name: 'EKINN+ (Fomento San Sebastián)', pais: 'España · Donostia', kind: 'Agencia pública de emprendimiento', tipo: 'INC/AC', enfoque: 'Impulso a nuevas iniciativas innovadoras: ayudas para aceleración y puesta en marcha.', link: 'https://ayudas.fomentosansebastian.eus/es/apoyo-a-empresas/ayudas-economicas/' },
+  { id: 'lanzadera', name: 'LANZADERA', pais: 'España · Valencia', kind: 'Incubadora y aceleradora', tipo: 'INC/AC', enfoque: 'Incubación/aceleración orientada a objetivos, basada en el modelo de gestión de Calidad Total.', link: 'https://lanzadera.es/aceleradora-e-incubadora-empresas/' },
 ];
 
 export const FINANCIAL_SECTORS = ['Banca', 'Seguros', 'Pagos', 'Financiación', 'Ahorro e inversión', 'Cumplimiento normativo', 'Otro sector'] as const;

@@ -13,7 +13,7 @@ const DETAIL: Record<NodeId, { title: string; qa: { q: string; a: string | strin
   acc: {
     title: 'Red de aceleradoras e incubadoras',
     qa: [
-      { q: '¿Con cuáles trabajaremos?', a: ACCELERATORS.map((a) => `${a.name} · ${a.partnership.toLowerCase()}`) },
+      { q: '¿Con cuáles trabajaremos?', a: ACCELERATORS.map((a) => `${a.name} · ${a.kind.toLowerCase()}`) },
       { q: '¿Qué implica el partnership?', a: ['Recomiendan INNBULTZADA a startups de servicios financieros', 'Aplican un primer filtro: servicios financieros + MVP', 'Derivan los proyectos tempranos a Gaztenpresa', 'Reciben recursos y herramientas de la estrategia impulsadora'] },
     ],
     go: { label: 'Ver el acceso de una startup', to: '/startup/acceso' },
