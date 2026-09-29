@@ -86,7 +86,13 @@ export default function Section() {
       <div className="flex flex-1 flex-col justify-center gap-5 py-4">
         {sec.cover ? (
           <div className="flex flex-col items-center gap-4">
-            {imgOk ? (
+            {sec.video ? (
+              <video controls preload="metadata" playsInline
+                onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()}
+                src={`${import.meta.env.BASE_URL}brand/${sec.video}`}
+                poster={`${import.meta.env.BASE_URL}brand/${sec.cover}`}
+                className="mx-auto max-h-[calc(100dvh-11rem)] w-full rounded-xl2 bg-navy object-contain shadow-card" />
+            ) : imgOk ? (
               <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title} onError={() => setImgOk(false)}
                 className="mx-auto max-h-[calc(100dvh-11rem)] w-full rounded-xl2 object-contain shadow-card" />
             ) : (

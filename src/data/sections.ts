@@ -23,6 +23,7 @@ export interface Section {
   loop?: boolean;
   diagram?: boolean;
   cover?: string;
+  video?: string;   // si está, la slide reproduce este video (cover = poster)
 }
 
 export const SECTIONS: Section[] = [
@@ -31,7 +32,7 @@ export const SECTIONS: Section[] = [
   { n: 3, slug: 'pregunta', eyebrow: '', title: 'La pregunta', lead: '', beats: [], cover: 'slide-3.png' },
   { n: 4, slug: 'actores', eyebrow: '', title: 'Actores claves', lead: '', beats: [], cover: 'slide-4.png' },
   { n: 5, slug: 'diagnostico', eyebrow: '', title: 'Diagnóstico', lead: '', beats: [], cover: 'slide-5.png' },
-  { n: 6, slug: 'entorno', eyebrow: '', title: 'Entorno de cooperación', lead: '', beats: [], cover: 'slide-6.png' },
+  { n: 6, slug: 'entorno', eyebrow: '', title: 'Entorno de cooperación', lead: '', beats: [], cover: 'slide-6.png', video: 'Duvan_aceleradoras.mp4' },
   { n: 7, slug: 'herramienta', eyebrow: '', title: 'La herramienta', lead: '', beats: [], cover: 'slide-7.png', cta: { label: 'Ver el prototipo navegable', to: '/capitulo/reto' } },
   { n: 8, slug: 'modelo', eyebrow: '', title: 'El modelo', lead: '', beats: [], cover: 'slide-8.png' },
   { n: 9, slug: 'cierre', eyebrow: '', title: 'Cierre', lead: '', beats: [], cover: 'slide-9.png' },
