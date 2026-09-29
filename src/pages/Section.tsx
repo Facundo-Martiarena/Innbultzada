@@ -87,14 +87,14 @@ export default function Section() {
         {sec.cover ? (
           <div className="flex flex-col items-center gap-4">
             {sec.video ? (
-              // Video arriba a la derecha, FUERA de la slide; la slide completa debajo.
-              <div className="flex w-full flex-col items-center gap-3">
+              // Slide a la izquierda + video emparejado a la derecha (lado a lado).
+              <div className="flex w-full items-center justify-center gap-5 max-lg:flex-col">
+                <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title}
+                  className="block max-h-[calc(100dvh-11rem)] w-auto max-w-full rounded-xl2 object-contain shadow-card lg:max-w-[calc(100%-20rem)]" />
                 <video controls preload="metadata" playsInline
                   onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()}
                   src={`${import.meta.env.BASE_URL}brand/${sec.video}`}
-                  className="w-[clamp(150px,22vw,280px)] self-end rounded-lg bg-navy shadow-lift ring-1 ring-black/20" />
-                <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title}
-                  className="block max-h-[calc(100dvh-19rem)] w-auto max-w-full rounded-xl2 object-contain shadow-card" />
+                  className="w-full max-w-[340px] shrink-0 rounded-lg bg-navy shadow-lift ring-1 ring-black/20 lg:w-[clamp(200px,22vw,320px)]" />
               </div>
             ) : imgOk ? (
               <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title} onError={() => setImgOk(false)}
