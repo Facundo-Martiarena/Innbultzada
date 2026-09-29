@@ -1,8 +1,11 @@
-import { ArrowRight, Briefcase, Building2, FastForward, GraduationCap, Handshake, Microscope, PlayCircle, Rocket, Target, Umbrella, UserRound, UserRoundCheck, Waypoints } from 'lucide-react';
+import { ArrowRight, Briefcase, Building2, FastForward, GraduationCap, Handshake, MessageCircle, Microscope, PlayCircle, Rocket, Target, Umbrella, UserRound, UserRoundCheck, Waypoints } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BrandHero } from '../components/BrandLogo';
-import { SECTIONS } from '../data/sections';
+
+// Feedback por WhatsApp. Reemplazar WSP_NUMBER por el número real: código de país sin "+" ni espacios.
+const WSP_NUMBER = '34667023227'; // código de país sin "+" ni espacios
+const WSP_MSG = 'Hola, vi la presentación de INNBULTZADA y quiero dejar mi feedback: ';
 
 const ORBIT = [
   { label: 'Startups', Icon: Rocket },
@@ -100,23 +103,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Lanzador: el pitch en 5 secciones */}
-      <section aria-labelledby="caps" className="border-t border-line/70 py-12 sm:py-14">
-        <div className="mb-6 sm:mb-8">
-          <p className="eyebrow">La presentación</p>
-          <h2 id="caps" className="mt-1 text-2xl font-semibold sm:text-3xl">Las 9 diapositivas</h2>
-        </div>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-          {SECTIONS.map((s) => (
-            <button key={s.slug} type="button" onClick={() => nav(`/seccion/${s.slug}`)}
-              className="card overflow-hidden text-left transition hover:-translate-y-0.5 hover:border-navy-300 hover:shadow-lift">
-              <img src={`${import.meta.env.BASE_URL}brand/${s.cover}`} alt={s.title} className="aspect-video w-full border-b border-line object-cover" />
-              <span className="flex items-center gap-2 px-3 py-2">
-                <span className="font-mono text-xs text-magenta">{String(s.n).padStart(2, '0')}</span>
-                <span className="truncate text-sm font-semibold text-navy">{s.title}</span>
-              </span>
-            </button>
-          ))}
+      {/* Feedback por WhatsApp */}
+      <section aria-labelledby="feedback" className="border-t border-line/70 py-12 sm:py-14">
+        <div className="card flex flex-col items-start gap-5 p-8 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="eyebrow">Tu opinión nos sirve</p>
+            <h2 id="feedback" className="mt-1 text-2xl font-semibold sm:text-3xl">¿Qué te pareció INNBULTZADA?</h2>
+            <p className="mt-2 max-w-xl text-ink-soft">Contanos qué mejorarías, qué te gustó o qué no se entiende. Un mensaje corto nos ayuda un montón.</p>
+          </div>
+          <a href={`https://wa.me/${WSP_NUMBER}?text=${encodeURIComponent(WSP_MSG)}`} target="_blank" rel="noopener noreferrer"
+            className="btn min-h-[52px] shrink-0 gap-2 bg-[#25D366] px-6 text-lg text-white shadow-sm transition hover:bg-[#1da851] hover:shadow-lift">
+            <MessageCircle size={20} aria-hidden /> Dejar feedback por WhatsApp
+          </a>
         </div>
       </section>
     </>
