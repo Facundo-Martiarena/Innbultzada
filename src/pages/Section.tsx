@@ -55,6 +55,12 @@ export default function Section() {
   const total = sec.beats.length;
   const more = revealed < total;
 
+  // Logo de LABORAL Kutxa superpuesto arriba-izquierda (mismo tamaño en todas las slides de contenido).
+  const lkLogo = sec.lkLogo ? (
+    <img src={`${import.meta.env.BASE_URL}brand/LK_logo.png`} alt="LABORAL Kutxa"
+      className="pointer-events-none absolute left-[3%] top-[3.5%] w-[11%]" />
+  ) : null;
+
   return (
     <div
       className={`mx-auto flex min-h-[calc(100dvh-4rem)] flex-col py-3 ${sec.cover ? 'max-w-none' : 'max-w-3xl'}`}
@@ -89,16 +95,22 @@ export default function Section() {
             {sec.video ? (
               // Slide a la izquierda + video emparejado a la derecha (lado a lado).
               <div className="flex w-full items-center justify-center gap-5 max-lg:flex-col">
-                <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title}
-                  className="block max-h-[calc(100dvh-11rem)] w-auto max-w-full rounded-xl2 object-contain shadow-card lg:max-w-[calc(100%-20rem)]" />
+                <div className="relative w-fit">
+                  <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title}
+                    className="block max-h-[calc(100dvh-11rem)] w-auto max-w-full rounded-xl2 object-contain shadow-card lg:max-w-[calc(100%-20rem)]" />
+                  {lkLogo}
+                </div>
                 <video controls preload="metadata" playsInline
                   onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()}
                   src={`${import.meta.env.BASE_URL}brand/${sec.video}`}
                   className="w-full max-w-[340px] shrink-0 rounded-lg bg-navy shadow-lift ring-1 ring-black/20 lg:w-[clamp(200px,22vw,320px)]" />
               </div>
             ) : imgOk ? (
-              <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title} onError={() => setImgOk(false)}
-                className="mx-auto max-h-[calc(100dvh-11rem)] w-full rounded-xl2 object-contain shadow-card" />
+              <div className="relative w-fit">
+                <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title} onError={() => setImgOk(false)}
+                  className="block max-h-[calc(100dvh-11rem)] w-auto max-w-full rounded-xl2 object-contain shadow-card" />
+                {lkLogo}
+              </div>
             ) : (
               <div className="grid min-h-[50vh] w-full place-items-center rounded-xl2 border border-line bg-paper-raised p-8 text-center">
                 <div>
