@@ -87,14 +87,14 @@ export default function Section() {
         {sec.cover ? (
           <div className="flex flex-col items-center gap-4">
             {sec.video ? (
-              // Slide de fondo + video chico en la esquina (picture-in-picture).
-              <div className="relative mx-auto w-fit">
-                <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title}
-                  className="block max-h-[calc(100dvh-11rem)] w-auto max-w-full rounded-xl2 object-contain shadow-card" />
+              // Video arriba a la derecha, FUERA de la slide; la slide completa debajo.
+              <div className="flex w-full flex-col items-center gap-3">
                 <video controls preload="metadata" playsInline
                   onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()}
                   src={`${import.meta.env.BASE_URL}brand/${sec.video}`}
-                  className="absolute bottom-3 right-3 w-[30%] min-w-[160px] max-w-[340px] rounded-lg bg-navy shadow-lift ring-1 ring-black/20" />
+                  className="w-[clamp(150px,22vw,280px)] self-end rounded-lg bg-navy shadow-lift ring-1 ring-black/20" />
+                <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title}
+                  className="block max-h-[calc(100dvh-19rem)] w-auto max-w-full rounded-xl2 object-contain shadow-card" />
               </div>
             ) : imgOk ? (
               <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title} onError={() => setImgOk(false)}
