@@ -14,6 +14,7 @@ export default function Section() {
   const loc = useLocation();
   const sec = sectionBySlug(slug);
   const startX = useRef<number | null>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const stateRevealed = (loc.state as { revealed?: number } | null)?.revealed;
   const [revealed, setRevealed] = useState(typeof stateRevealed === 'number' ? stateRevealed : (sec?.beats.length ?? 0));
   const [imgOk, setImgOk] = useState(true);
@@ -23,6 +24,11 @@ export default function Section() {
     setRevealed(typeof s === 'number' ? s : (sec?.beats.length ?? 0));
     window.scrollTo({ top: 0 });
   }, [loc.key]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Al entrar en la slide del video, arranca solo (si el navegador lo permite; quedan los controles).
+  useEffect(() => {
+    if (sec?.video) videoRef.current?.play().catch(() => {});
+  }, [loc.key, sec?.video]);
 
   const idx = sec ? SECTIONS.indexOf(sec) : -1;
   const prev = SECTIONS[idx - 1];
@@ -102,7 +108,7 @@ export default function Section() {
                     className="block max-h-[calc(100dvh-11rem)] w-auto max-w-full rounded-xl2 object-contain shadow-card lg:h-[64vh] lg:max-h-none" />
                   {lkLogo}
                 </div>
-                <video controls preload="metadata" playsInline
+                <video ref={videoRef} controls preload="auto" playsInline
                   onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()}
                   src={`${import.meta.env.BASE_URL}brand/${sec.video}`}
                   className="w-full max-w-[280px] shrink-0 rounded-lg bg-navy object-contain shadow-lift ring-1 ring-black/20 lg:h-[64vh] lg:w-auto lg:max-w-none" />
