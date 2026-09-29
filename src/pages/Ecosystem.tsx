@@ -1,7 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { EcosystemDiagram } from '../components/EcosystemDiagram';
 import { PageHeader } from '../components/PageHeader';
 import { ACCELERATORS } from '../data/ecosystem';
 import type { NodeId } from '../data/ecosystemGraph';
@@ -45,6 +44,20 @@ const DETAIL: Record<NodeId, { title: string; qa: { q: string; a: string | strin
   kpis: { title: 'KPIs y acuerdos posventa', qa: [{ q: '¿Qué se mide?', a: PROGRAM.kpis.map((k) => `${k.label} · ${k.target}`) }] },
 };
 
+/* Bloques del modelo (chips) para navegar el detalle bajo la imagen del ecosistema. */
+const BLOCKS: { id: NodeId; label: string }[] = [
+  { id: 'acc', label: 'Entorno de cooperación' },
+  { id: 'deps', label: 'Departamentos LK' },
+  { id: 'votacion', label: 'Votación' },
+  { id: 'startups', label: 'Startups' },
+  { id: 'match', label: 'INNBULTZADA' },
+  { id: 'impulso', label: 'Programa' },
+  { id: 'innov', label: 'Equipo de innovación' },
+  { id: 'empresas', label: 'Empresa establecida' },
+  { id: 'kpis', label: 'Resultados e impacto' },
+  { id: 'ideas', label: 'Ideas' },
+];
+
 export default function Ecosystem() {
   const [sel, setSel] = useState<NodeId>('match');
   const nav = useNavigate();
@@ -57,7 +70,14 @@ export default function Ecosystem() {
 
       <div className="grid grid-cols-12 gap-6">
         <div className="col-span-8 max-lg:col-span-12">
-          <EcosystemDiagram sel={sel} onSelect={setSel} />
+          <img src={`${import.meta.env.BASE_URL}brand/ecosistema.png`} alt="Modelo completo del ecosistema INNBULTZADA"
+            className="w-full rounded-xl2 border border-line bg-paper-raised object-contain shadow-card" />
+          <div className="mt-4 flex flex-wrap gap-1.5" role="group" aria-label="Bloques del ecosistema">
+            {BLOCKS.map((b) => (
+              <button key={b.id} type="button" aria-pressed={sel === b.id} onClick={() => setSel(b.id)}
+                className={`chip min-h-[32px] px-3 ${sel === b.id ? 'bg-navy text-white' : 'bg-paper-sunk text-navy hover:bg-navy-50'}`}>{b.label}</button>
+            ))}
+          </div>
           <div className="mt-4 flex flex-wrap gap-3">
             <button type="button" className="btn-primary" onClick={() => nav('/startup/acceso')}>Entrar como startup <ArrowRight size={17} aria-hidden /></button>
             <button type="button" className="btn-navy" onClick={() => nav('/laboral-kutxa/diagnostico')}>Entrar como LABORAL Kutxa <ArrowRight size={17} aria-hidden /></button>

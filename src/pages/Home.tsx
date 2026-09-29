@@ -1,4 +1,4 @@
-import { Briefcase, FastForward, GraduationCap, Handshake, Microscope, PlayCircle, Rocket, Target, Umbrella, UserRound, UserRoundCheck } from 'lucide-react';
+import { ArrowRight, Briefcase, Building2, FastForward, GraduationCap, Handshake, Microscope, PlayCircle, Rocket, Target, Umbrella, UserRound, UserRoundCheck, Waypoints } from 'lucide-react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BrandHero } from '../components/BrandLogo';
@@ -17,7 +17,7 @@ const ORBIT = [
   { label: 'Gaztenpresa', Icon: Target },
 ];
 
-const FACTS = ['Piloto pagado 30.000 €', 'Sin equity', '6 meses'];
+const FACTS = ['Trabaja con tu primer cliente', '30.000 €', 'Sin ceder capital', 'Entorno seguro de aceleración', '4 meses'];
 
 export default function Home() {
   const nav = useNavigate();
@@ -37,14 +37,11 @@ export default function Home() {
             De retos a nuevas empresas.
           </p>
           <p className="mt-4 max-w-xl leading-relaxed text-ink-soft animate-rise sm:text-lg" style={{ animationDelay: '180ms' }}>
-            LABORAL Kutxa publica sus retos de servicios financieros; las startups se postulan y las mejores llegan a un <strong className="text-navy">piloto pagado</strong>.
+            LABORAL Kutxa publica sus retos de servicios financieros; las startups se postulan y las mejores llegan a <strong className="text-navy">trabajar con su primer cliente</strong>.
           </p>
           <div className="mt-7 flex flex-wrap gap-3 animate-rise" style={{ animationDelay: '240ms' }}>
             <button type="button" className="btn-primary min-h-[52px] px-6 text-lg" onClick={() => nav('/seccion/portada')}>
               <PlayCircle size={20} aria-hidden /> Empezar la presentación
-            </button>
-            <button type="button" className="btn-ghost min-h-[52px] px-6 text-lg" onClick={() => nav('/ecosistema')}>
-              Ver el ecosistema
             </button>
           </div>
           <ul className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm animate-rise" style={{ animationDelay: '280ms' }} aria-label="El programa en cifras">
@@ -77,6 +74,29 @@ export default function Home() {
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* Accesos: explorar el modelo por dentro */}
+      <section aria-labelledby="accesos" className="border-t border-line/70 py-12 sm:py-14">
+        <div className="mb-6 sm:mb-8">
+          <p className="eyebrow">Explora el modelo por dentro</p>
+          <h2 id="accesos" className="mt-1 text-2xl font-semibold sm:text-3xl">Tres formas de recorrerlo</h2>
+        </div>
+        <div className="grid grid-cols-3 gap-4 max-lg:grid-cols-1">
+          {[
+            { Icon: Waypoints, title: 'El ecosistema', text: 'Cómo encajan LABORAL Kutxa, las startups y la red de cooperación.', to: '/ecosistema' },
+            { Icon: Rocket, title: 'Vista startup', text: 'El recorrido de una startup: acceso, retos, postulación y seguimiento.', to: '/startup/acceso' },
+            { Icon: Building2, title: 'Vista LABORAL Kutxa', text: 'Del diagnóstico de los departamentos al reto publicado y la evaluación.', to: '/laboral-kutxa/diagnostico' },
+          ].map((c) => (
+            <button key={c.title} type="button" onClick={() => nav(c.to)}
+              className="card flex flex-col items-start p-6 text-left transition hover:-translate-y-0.5 hover:border-navy-300 hover:shadow-lift">
+              <span className="grid h-11 w-11 place-items-center rounded-xl bg-navy-50 text-navy"><c.Icon size={22} strokeWidth={1.75} aria-hidden /></span>
+              <h3 className="mt-3 text-lg font-semibold text-navy">{c.title}</h3>
+              <p className="mt-1 text-sm leading-snug text-ink-soft">{c.text}</p>
+              <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-magenta">Entrar <ArrowRight size={15} aria-hidden /></span>
+            </button>
+          ))}
         </div>
       </section>
 
