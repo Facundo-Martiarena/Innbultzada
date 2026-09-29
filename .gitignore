@@ -4,6 +4,7 @@ node_modules
 # build
 dist
 presentacion-offline
+entrega
 *.tsbuildinfo
 
 # editores / SO
