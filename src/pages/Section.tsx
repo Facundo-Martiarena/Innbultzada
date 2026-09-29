@@ -94,16 +94,16 @@ export default function Section() {
           <div className="flex flex-col items-center gap-4">
             {sec.video ? (
               // Slide a la izquierda + video emparejado a la derecha (lado a lado).
-              <div className="flex w-full items-center justify-center gap-5 max-lg:flex-col">
+              <div className="flex w-full items-center justify-center gap-3 max-lg:flex-col">
                 <div className="relative w-fit">
                   <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title}
-                    className="block max-h-[calc(100dvh-11rem)] w-auto max-w-full rounded-xl2 object-contain shadow-card lg:max-w-[calc(100%-13rem)]" />
+                    className="block max-h-[calc(100dvh-11rem)] w-auto max-w-full rounded-xl2 object-contain shadow-card lg:max-w-[calc(100%-8rem)]" />
                   {lkLogo}
                 </div>
                 <video controls preload="metadata" playsInline
                   onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()}
                   src={`${import.meta.env.BASE_URL}brand/${sec.video}`}
-                  className="w-full max-w-[300px] shrink-0 rounded-lg bg-navy shadow-lift ring-1 ring-black/20 lg:w-[clamp(150px,15vw,210px)]" />
+                  className="w-full max-w-[280px] shrink-0 rounded-lg bg-navy shadow-lift ring-1 ring-black/20 lg:w-[clamp(120px,11vw,160px)]" />
               </div>
             ) : imgOk ? (
               <div className="relative w-fit">
