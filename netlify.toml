@@ -1,0 +1,10 @@
+# Deploy en Netlify — SPA de Vite (React) con HashRouter.
+# Con HashRouter las rutas viven en el hash (#/...), así que el servidor
+# siempre sirve index.html desde la raíz: NO hace falta redirect de SPA.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
