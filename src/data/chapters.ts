@@ -1,5 +1,5 @@
 import {
-  ClipboardList, Vote, Megaphone, Rocket, Heart, Star,
+  ClipboardList, Vote, Megaphone, Rocket, Bookmark, Star,
   ShieldCheck, FlaskConical, Gauge, FileSignature, TrendingUp, Sprout, type LucideIcon,
 } from 'lucide-react';
 import type { StageId } from './types';
@@ -14,8 +14,8 @@ export interface Beat {
   text: string;
   stat?: string;
   detail?: { label: string; path: (id: string) => string };
-  /** Mini-visual del swipe (solo capítulo del match) */
-  swipe?: { eyebrow: string; cardTitle: string; cardSub: string; rightStamp: string; RightIcon: LucideIcon };
+  /** Mini-visual de la decisión evaluada (solo capítulo del match) */
+  evalCard?: { eyebrow: string; cardTitle: string; cardSub: string; encaje: number; action: string; ActionIcon: LucideIcon };
 }
 
 export interface Chapter {
@@ -42,20 +42,20 @@ export const CHAPTERS: Chapter[] = [
   {
     n: 2, slug: 'match', stage: 'match', eyebrow: 'Conectar · evaluar y decidir',
     title: 'El match',
-    lead: 'Las dos partes se encuentran, pero cada lado evalúa antes de decidir. El swipe es el gesto; la decisión es pensada.',
+    lead: 'Las dos partes se encuentran, pero cada lado evalúa el encaje antes de decidir. No es deslizar: se compara y se elige con criterio.',
     beats: [
       {
         Icon: Rocket, title: 'Lado startup · evalúan los retos',
         text: 'Miran el encaje, las capacidades y el plazo de cada reto antes de postularse.',
         stat: 'encaje → postulación',
-        swipe: { eyebrow: 'RD-01 · Reto', cardTitle: 'Tesorería en PYMEs', cardSub: 'Piloto · 30.000 €', rightStamp: 'SÍ', RightIcon: Heart },
+        evalCard: { eyebrow: 'RD-01 · Reto', cardTitle: 'Tesorería en PYMEs', cardSub: 'Piloto · 30.000 €', encaje: 93, action: 'Me interesa', ActionIcon: Bookmark },
         detail: { label: 'Probar la experiencia', path: () => '/startup/retos' },
       },
       {
         Icon: Star, title: 'Lado LABORAL Kutxa · evalúan candidaturas',
         text: 'El equipo aplica la rúbrica a cada candidatura: 5 preseleccionadas → pitch → 1–2.',
         stat: '5 → 1–2',
-        swipe: { eyebrow: 'Startup · candidatura', cardTitle: 'Fluxia Analytics', cardSub: 'IA · datos · finanzas', rightStamp: 'SÍ', RightIcon: Star },
+        evalCard: { eyebrow: 'Startup · candidatura', cardTitle: 'Fluxia Analytics', cardSub: 'IA · datos · finanzas', encaje: 88, action: 'Preseleccionar', ActionIcon: Star },
         detail: { label: 'Ver el pitch final', path: (id) => `/reto/${id}/evaluacion` },
       },
     ],

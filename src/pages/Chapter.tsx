@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { SwipeCardMini } from '../components/SwipeCardMini';
+import { EvalCardMini } from '../components/EvalCardMini';
 import { CHAPTERS, chapterBySlug } from '../data/chapters';
 import { stageById } from '../data/model';
 import { STAGE_ICON } from '../lib/icons';
@@ -118,9 +118,9 @@ export default function Chapter() {
                     )}
                   </div>
                 </div>
-                {b.swipe && (
+                {b.evalCard && (
                   <div className="shrink-0">
-                    <SwipeCardMini eyebrow={b.swipe.eyebrow} cardTitle={b.swipe.cardTitle} cardSub={b.swipe.cardSub} rightStamp={b.swipe.rightStamp} RightIcon={b.swipe.RightIcon} />
+                    <EvalCardMini eyebrow={b.evalCard.eyebrow} cardTitle={b.evalCard.cardTitle} cardSub={b.evalCard.cardSub} encaje={b.evalCard.encaje} action={b.evalCard.action} ActionIcon={b.evalCard.ActionIcon} />
                   </div>
                 )}
               </div>

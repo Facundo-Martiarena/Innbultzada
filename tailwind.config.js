@@ -40,16 +40,6 @@ export default {
           '0%': { opacity: 0, transform: 'scale(.5) rotate(-8deg)' },
           '100%': { opacity: 1, transform: 'scale(1) rotate(0)' },
         },
-        swipeHint: {
-          '0%, 22%': { transform: 'translateX(0) rotate(0deg)' },
-          '46%, 62%': { transform: 'translateX(20px) rotate(6deg)' },
-          '86%, 100%': { transform: 'translateX(0) rotate(0deg)' },
-        },
-        stampIn: {
-          '0%, 34%': { opacity: 0, transform: 'rotate(-12deg) scale(.85)' },
-          '48%, 64%': { opacity: 1, transform: 'rotate(-12deg) scale(1)' },
-          '82%, 100%': { opacity: 0, transform: 'rotate(-12deg) scale(.85)' },
-        },
       },
       animation: {
         rise: 'rise .5s cubic-bezier(.2,.7,.2,1) both',
@@ -57,8 +47,6 @@ export default {
         pulseRing: 'pulseRing 1.8s ease-out infinite',
         reveal: 'revealUp .55s cubic-bezier(.22,1.2,.36,1) both',
         popIn: 'popIn .5s cubic-bezier(.34,1.56,.64,1) .12s both',
-        swipeHint: 'swipeHint 3.6s ease-in-out infinite',
-        stampIn: 'stampIn 3.6s ease-in-out infinite',
       },
     },
   },
