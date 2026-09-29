@@ -33,11 +33,11 @@ export default function Section() {
     if (dir === 1) {
       if (revealed < sec.beats.length) setRevealed((r) => r + 1);
       else if (next) nav(`/seccion/${next.slug}`, { state: { revealed: 0 } });
-      else nav('/programa');
+      // Última slide: no se avanza fuera del deck (se sale con Escape o el botón Salir).
     } else {
       if (revealed > 0) setRevealed((r) => r - 1);
       else if (prev) nav(`/seccion/${prev.slug}`, { state: { revealed: prev.beats.length } });
-      else nav('/');
+      // Primera slide: no se retrocede fuera del deck.
     }
   };
 
@@ -54,6 +54,8 @@ export default function Section() {
   if (!sec) return <Navigate to="/seccion/portada" replace />;
   const total = sec.beats.length;
   const more = revealed < total;
+  const atStart = revealed === 0 && !prev;   // primera slide: no hay hacia atrás
+  const atEnd = !more && !next;              // última slide: no hay hacia adelante
 
   // Logo de LABORAL Kutxa superpuesto arriba-izquierda (mismo tamaño en todas las slides de contenido).
   const lkLogo = sec.lkLogo ? (
@@ -173,15 +175,15 @@ export default function Section() {
       </div>
 
       <nav className="flex items-center justify-between gap-3 border-t border-line pt-4" aria-label="Presentación">
-        <button type="button" className="btn-ghost min-h-[44px] shrink-0" onClick={() => step(-1)}>
+        <button type="button" disabled={atStart} className="btn-ghost min-h-[44px] shrink-0" onClick={() => step(-1)}>
           <ArrowLeft size={18} aria-hidden />
           <span className="max-sm:sr-only">{revealed > 0 ? 'Anterior' : prev ? prev.title : 'Inicio'}</span>
         </button>
         <span className="mx-auto font-mono text-xs text-ink-muted" aria-hidden>
           {total ? `${Math.min(revealed + (more ? 1 : 0), total)}/${total}` : ''} · <span className="max-sm:hidden">← →</span><span className="sm:hidden">deslizá</span>
         </span>
-        <button type="button" className="btn-primary min-h-[44px] shrink-0" onClick={() => step(1)}>
-          <span>{more ? 'Siguiente' : next ? next.title : 'Programa'}</span>
+        <button type="button" disabled={atEnd} className="btn-primary min-h-[44px] shrink-0" onClick={() => step(1)}>
+          <span>{more ? 'Siguiente' : next ? next.title : 'Fin'}</span>
           <ArrowRight size={18} aria-hidden />
         </button>
       </nav>
