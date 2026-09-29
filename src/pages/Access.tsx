@@ -44,7 +44,7 @@ export default function Access() {
         <div className="col-span-8 grid gap-6 max-lg:col-span-12">
           <fieldset>
             <legend className="mb-3 text-lg font-semibold text-navy">1. ¿Qué aceleradora o incubadora te recomienda?</legend>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {ACCELERATORS.map((a) => (
                 <Radio key={a.id} name="acc" on={accelerator === a.id} onChange={() => setAccelerator(a.id)}>
                   <span className="block font-semibold leading-tight text-navy">{a.name}</span>

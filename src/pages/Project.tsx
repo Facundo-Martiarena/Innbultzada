@@ -46,7 +46,7 @@ export default function Project() {
           <section className="card p-6" aria-labelledby="onb">
             <h2 id="onb" className="flex items-center gap-2 text-lg font-semibold"><ShieldCheck size={19} className="text-magenta" aria-hidden />Mes 1 · Alta como proveedor y revisión de seguridad</h2>
             <p className="text-sm text-ink-muted">Viabilidad legal <strong className="text-impact-600">alta</strong>, a revisar con Cumplimiento.</p>
-            <ul className="mt-4 grid grid-cols-2 gap-2.5">
+            <ul className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
               {ONBOARDING.map((o) => {
                 const on = done.includes(o.id);
                 const optional = o.id === 'licencia';

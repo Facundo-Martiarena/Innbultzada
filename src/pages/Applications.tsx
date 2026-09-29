@@ -42,8 +42,8 @@ export default function Applications() {
       />
 
       {/* Shortlist: 5 huecos */}
-      <section className="card mb-6 flex items-center gap-4 p-4" aria-label={`Shortlist: ${shortlist.length} de ${MAX_SHORTLIST}`} aria-live="polite">
-        <p className="w-44 shrink-0 font-semibold text-navy">Preseleccionadas <span className="font-mono text-magenta">{shortlist.length}/{MAX_SHORTLIST}</span></p>
+      <section className="card mb-6 flex flex-col gap-3 p-4 sm:flex-row sm:items-center sm:gap-4" aria-label={`Shortlist: ${shortlist.length} de ${MAX_SHORTLIST}`} aria-live="polite">
+        <p className="shrink-0 font-semibold text-navy sm:w-44">Preseleccionadas <span className="font-mono text-magenta">{shortlist.length}/{MAX_SHORTLIST}</span></p>
         <ol className="grid flex-1 grid-cols-5 gap-2">
           {Array.from({ length: MAX_SHORTLIST }).map((_, i) => {
             const a = apps.find((x) => x.actor.id === shortlist[i]);

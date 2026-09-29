@@ -59,7 +59,7 @@ export default function Scale() {
         </ol>
       </div>
 
-      <section className="mt-10 grid grid-cols-2 gap-5" aria-label="KPIs del programa y qué gana LABORAL Kutxa">
+      <section className="mt-10 grid grid-cols-1 gap-5 lg:grid-cols-2" aria-label="KPIs del programa y qué gana LABORAL Kutxa">
         <div className="card p-6">
           <h2 className="flex items-center gap-2 text-lg font-semibold"><Target size={18} className="text-magenta" aria-hidden />KPIs del programa</h2>
           <ul className="mt-3 grid gap-2">

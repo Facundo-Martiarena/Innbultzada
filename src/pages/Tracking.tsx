@@ -32,7 +32,7 @@ export default function Tracking() {
           <p className="eyebrow">Mi candidatura</p>
           <h2 id="cand" className="mt-1 text-xl font-semibold">{c.title}</h2>
           <p className="text-sm text-ink-muted">{c.code} · Piloto pagado de 30.000 € · sin equity{acc ? ` · recomendada por ${acc.name}` : ''}</p>
-          <ol className="mt-6 grid grid-cols-6 gap-2">
+          <ol className="mt-6 grid grid-cols-3 gap-2 sm:grid-cols-6">
             {STEPS.map((s, i) => {
               const st = i < stageIdx ? 'done' : i === stageIdx ? 'current' : 'pending';
               return (

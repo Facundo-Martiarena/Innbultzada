@@ -42,7 +42,7 @@ export default function Validate() {
           <p className="max-w-md text-right text-sm text-ink-muted present:hidden">La decisión la toman Challenge Owner y Venture Team a partir de la evidencia, no del calendario.</p>
         </div>
         <div className="grid grid-cols-12 gap-5">
-          <div role="radiogroup" aria-label="Decisión de validación" className="col-span-8 grid grid-cols-3 gap-4 max-lg:col-span-12">
+          <div role="radiogroup" aria-label="Decisión de validación" className="col-span-8 grid grid-cols-1 gap-4 max-lg:col-span-12 sm:grid-cols-3">
             {OPTIONS.map((o) => (
               <DecisionCard key={o.id} name="gate" code={o.code} title={o.title} summary={o.summary} Icon={o.Icon} tone={o.tone}
                 selected={decision === o.id} onSelect={() => setDecision(o.id)} />

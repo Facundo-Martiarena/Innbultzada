@@ -37,7 +37,7 @@ export default function Idea() {
       />
 
       <div className="grid grid-cols-12 gap-6">
-        <form onSubmit={submit} className="card col-span-8 grid grid-cols-2 gap-5 p-7 max-lg:col-span-12" aria-label="Propuesta de idea">
+        <form onSubmit={submit} className="card col-span-8 grid grid-cols-1 gap-5 p-7 max-lg:col-span-12 sm:grid-cols-2" aria-label="Propuesta de idea">
           <fieldset disabled={!!idea} className="contents">
             <label className="col-span-2 text-sm font-semibold text-navy">Título de la idea
               <input className={field} value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />

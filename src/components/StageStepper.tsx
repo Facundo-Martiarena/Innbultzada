@@ -60,7 +60,7 @@ export function StageStepper({ current = null, doneBefore, variant = 'compact', 
 
   if (variant === 'workspace') {
     return (
-      <ol className="grid grid-cols-6 gap-2" aria-label="Progreso del proyecto">
+      <ol className="grid grid-cols-3 gap-2 sm:grid-cols-6" aria-label="Progreso del proyecto">
         {STAGES.map((s, i) => {
           const st = statusOf(i, cur, done);
           const Icon = STAGE_ICON[s.id];

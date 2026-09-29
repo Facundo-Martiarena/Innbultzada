@@ -64,7 +64,7 @@ export default function Call() {
             </div>
             <section className="p-7">
               <h3 className="text-base font-semibold">Capacidades buscadas</h3>
-              <div className="mt-2 grid grid-cols-3 gap-2">{c.needs.map((n) => <CapabilityCard key={n} id={n} compact />)}</div>
+              <div className="mt-2 grid grid-cols-2 gap-2 sm:grid-cols-3">{c.needs.map((n) => <CapabilityCard key={n} id={n} compact />)}</div>
             </section>
           </article>
 

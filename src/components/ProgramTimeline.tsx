@@ -18,7 +18,7 @@ export function ProgramTimeline({ current }: { current?: ProgramPhase }) {
         <p className="font-semibold text-navy">Programa INNBULTZADA · 6 meses, prorrogables</p>
         <p className="text-xs text-ink-muted">Sin equity · piloto pagado de 30.000 € por startup</p>
       </div>
-      <ol className="grid grid-cols-8 gap-1.5">
+      <ol className="grid grid-cols-4 gap-1.5 sm:grid-cols-8">
         {PHASES.map((p, i) => {
           const st = i < ci ? 'done' : i === ci ? 'current' : 'pending';
           return (

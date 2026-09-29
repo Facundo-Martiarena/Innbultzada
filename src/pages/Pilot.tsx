@@ -46,7 +46,7 @@ export default function Pilot() {
         <section className="col-span-7 max-lg:col-span-12" aria-labelledby="c0-cands">
           <h2 id="c0-cands" className="text-lg font-semibold">Posibles Cliente 0 para este reto</h2>
           <p className="text-sm text-ink-muted">Actores conceptuales. Selección ilustrativa, sin compromisos atribuidos.</p>
-          <div role="radiogroup" aria-label="Cliente 0" className="mt-3 grid grid-cols-2 gap-3">
+          <div role="radiogroup" aria-label="Cliente 0" className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
             {CLIENT0_CANDIDATES.map((x) => {
               const on = x.id === client0;
               return (

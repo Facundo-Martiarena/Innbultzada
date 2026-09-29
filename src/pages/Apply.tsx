@@ -31,7 +31,7 @@ export default function Apply() {
       />
 
       <div className="grid grid-cols-12 gap-6">
-        <form onSubmit={submit} className="card col-span-8 grid grid-cols-2 gap-5 p-7 max-lg:col-span-12" aria-label="Formulario de postulación">
+        <form onSubmit={submit} className="card col-span-8 grid grid-cols-1 gap-5 p-7 max-lg:col-span-12 sm:grid-cols-2" aria-label="Formulario de postulación">
           <fieldset disabled={applied} className="contents">
             <label className="text-sm font-semibold text-navy">Startup
               <input className={field} defaultValue={me.name} />

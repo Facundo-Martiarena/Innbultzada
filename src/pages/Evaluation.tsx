@@ -92,7 +92,7 @@ export default function Evaluation() {
         </div>
       </Reveal>
 
-      <div className="mt-6 grid grid-cols-2 gap-5" aria-live="polite">
+      <div className="mt-6 grid grid-cols-1 gap-5 lg:grid-cols-2" aria-live="polite">
         <section className="rounded-xl2 border-2 border-magenta bg-paper-raised p-5">
           <h3 className="flex items-center gap-2 text-lg font-semibold"><Microscope size={18} className="text-magenta" aria-hidden />Elegidas para impulsar <span className="font-mono text-sm text-ink-muted">{chosen.length}/{MAX_SELECTED}</span></h3>
           <p className="text-sm text-ink-muted">Contrato de piloto pagado de 30.000 € cada una, sin equity. Programa de 6 meses.</p>
@@ -104,7 +104,7 @@ export default function Evaluation() {
         <section className="rounded-xl2 border-2 border-dashed border-navy-300 bg-paper-raised p-5">
           <h3 className="flex items-center gap-2 text-lg font-semibold"><Archive size={18} className="text-navy" aria-hidden />Pool de empresas solución <span className="font-mono text-sm text-ink-muted">{backlog.length}</span></h3>
           <p className="text-sm text-ink-muted">No avanzan en este reto, pero quedan en el backlog para futuros retos o como alternativa si el piloto no funciona.</p>
-          <ul className="mt-3 grid grid-cols-2 gap-2">
+          <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
             {backlog.map((r) => <li key={r.a.id} className="rounded-xl bg-paper-sunk p-3"><ActorBadge actor={r.a} size="sm" /></li>)}
           </ul>
         </section>
