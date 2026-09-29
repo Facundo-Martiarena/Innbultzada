@@ -87,11 +87,15 @@ export default function Section() {
         {sec.cover ? (
           <div className="flex flex-col items-center gap-4">
             {sec.video ? (
-              <video controls preload="metadata" playsInline
-                onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()}
-                src={`${import.meta.env.BASE_URL}brand/${sec.video}`}
-                poster={`${import.meta.env.BASE_URL}brand/${sec.cover}`}
-                className="mx-auto max-h-[calc(100dvh-11rem)] w-full rounded-xl2 bg-navy object-contain shadow-card" />
+              // Slide de fondo + video chico en la esquina (picture-in-picture).
+              <div className="relative mx-auto w-fit">
+                <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title}
+                  className="block max-h-[calc(100dvh-11rem)] w-auto max-w-full rounded-xl2 object-contain shadow-card" />
+                <video controls preload="metadata" playsInline
+                  onPointerDown={(e) => e.stopPropagation()} onPointerUp={(e) => e.stopPropagation()}
+                  src={`${import.meta.env.BASE_URL}brand/${sec.video}`}
+                  className="absolute bottom-3 right-3 w-[30%] min-w-[160px] max-w-[340px] rounded-lg bg-navy shadow-lift ring-1 ring-black/20" />
+              </div>
             ) : imgOk ? (
               <img src={`${import.meta.env.BASE_URL}brand/${sec.cover}`} alt={sec.title} onError={() => setImgOk(false)}
                 className="mx-auto max-h-[calc(100dvh-11rem)] w-full rounded-xl2 object-contain shadow-card" />
